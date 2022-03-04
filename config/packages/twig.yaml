@@ -1,0 +1,9 @@
+twig:
+    default_path: "%kernel.project_dir%/templates"
+    form_themes: ["_common/form-template.html.twig"]
+    globals:
+        stripe_public_key: "%stripe_public_key%"
+        csrfTokenManager:  '@security.csrf.token_manager'
+when@test:
+    twig:
+        strict_variables: true

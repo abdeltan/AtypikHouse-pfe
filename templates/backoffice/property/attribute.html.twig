@@ -1,0 +1,47 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Mes Annonces
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-6">
+            <form action="{{ path('admin-dynamic-attribute',{'id':property.id}) }}" method="POST">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h2>Attributs dynamiques</h2>
+                    </div>
+                    {% for attr in propertyAttributes %}
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="{{ attr.title }}" class="required">{{ attr.title }}</label>
+                            <input type="text" id="{{ attr.title }}" name="{{ attr.title }}"
+                                {{(attr.required)? 'required': '' }} class="form-control form-control">
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-outline-success w-100">Ajouter</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ path('manage-adresse',{'id':property.id}) }}"
+                            class="btn btn-outline-dark w-100">Continuer</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

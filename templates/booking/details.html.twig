@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Réservation
+{% endblock title %}
+
+{% block body %}
+<div id="reservationDetails">
+    <div class="container !direction !spacing">
+        <div class="row justify-content-center mt-5">
+            <div class="col-sm-12 my-5">
+                <h1>Hébergement - {{ property.title }}</h1>
+            </div>
+            <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                                <p class="fw-bold m-0">Réservation N°</p>{{ reservation.bookNumber }}
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0">
+                                <p class="fw-bold m-0">Réservée</p>le {{ reservation.createdAt|date("m/d/Y à H:i:s") }}
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0">
+                                <p class="fw-bold m-0">Prix TTC</p>
+                                {{ (reservation.priceHT + (reservation.priceHT * 0.2)) }}€
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0">
+                                <p class="fw-bold m-0">Statut</p>
+                                <span class="badge rounded-pill {{ (reservation.status)? 'bg-success':'bg-danger' }}">
+                                    {{ (reservation.status)? 'Confirmée':'Annulée' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-house-flood fa-icon"></i>
+                <p>{{ property.propertyType.title }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-users fa-icon"></i>
+                <p>{{ property.capacity }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-draw-square fa-icon"></i>
+                <p>{{ property.superficie }} m2</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-dewpoint fa-icon"></i>
+                <p>{{ (property.water)? 'Oui':'Non' }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-bolt  fa-icon"></i>
+                <p>{{ (property.electricity)? 'Oui':'Non' }}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center bg-light rounded-3 p-5">
+            <h2 class="text-capitalize mb-3">équipements</h2>
+            {% for equipment in property.equipments %}
+            <div class="col-sm-12 col-md-3">
+                <span class="text-muted">{{ equipment.title }}</span>
+                <p class="fw-bold">{{ equipment.value }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div id="map" class="h-100 p-5 text-white bg-dark rounded-3"></div>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Déscription</h2>
+                    {{ property.description }}
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-stretch mt-3">
+            <div class="col-md-6 order-sm-1 order-2 mt-3 mt-md-0">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Les inclus</h2>
+                    <p>{{ property.getIncludes() }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0 order-1">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Les activités du domaine</h2>
+                    <p>{{ property.getActivities() }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-stretch mt-3 mt-md-0">
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Literie</h2>
+                    <p>{{ property.getLiterie() }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Sanitaires</h2>
+                    <p>{{ property.getSanitaire() }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        var adresse =
+            "{{ property.addresse.streetNumber }} {{ property.addresse.streetName }},{{ property.addresse.city }},{{ property.addresse.country }}";
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZWxtYWhkaS1iZW5icmFoaW0iLCJhIjoiY2t4b290ZGhlMGtrZDJ2b2VtaHB6cXRqeSJ9.a7SmdbsO1IfjPJdHASuSyg';
+        const mapboxClient = mapboxSdk({
+            accessToken: mapboxgl.accessToken
+        });
+        mapboxClient.geocoding
+            .forwardGeocode({
+                query: adresse,
+                autocomplete: false,
+                limit: 2
+            })
+            .send()
+            .then((response) => {
+                if (
+                    !response ||
+                    !response.body ||
+                    !response.body.features ||
+                    !response.body.features.length
+                ) {
+                    console.error('Invalid response:');
+                    console.error(response);
+                    return;
+                }
+                const feature = response.body.features[0];
+
+                const map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: feature.center,
+                    zoom: 10
+                });
+                new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+            });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+#home {
+
+    .form-cover {
+        background-image: url('../../../public/images/cover.svg');
+        color: hsla(0, 0%, 100%, .6);
+        position: relative;
+        background-position: 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        min-height: 600px;
+    }
+
+    #payment,
+    #positiveReviews,
+    #bookingInstantly {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    #payment {
+        background-image: url('../../../public/images/payment.avif');
+    }
+
+    #positiveReviews {
+        background-image: url('../../../public/images/review.png');
+    }
+
+    #bookingInstantly {
+        background-image: url('../../../public/images/speed.png');
+    }
+}

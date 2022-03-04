@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="robots" content="noindex" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+    {{ leogout_seo() }}
+    <title>
+        {% block title %}{% endblock %}
+        - AtypikHouse
+    </title>
+    <link rel="shortcut icon" href="{{ asset('/images/atypikHouse.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css' rel='stylesheet' />
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    {% include "./layout/header.html.twig" %}
+    <main class="">
+        {% block body %}{% endblock %}
+    </main>
+    {% include "./layout/footer.html.twig" %}
+    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <script src='/js/bs-stepper.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    {{ encore_entry_script_tags('app') }}
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+    <script>
+        Swal.fire({
+            type: "{{ label }}",
+            html: "{{ message }}"
+        })
+    </script>
+    {% endfor %}
+    {% endfor %}
+    {% block javascript %}{% endblock %}
+    <script>
+        window.axeptioSettings = {
+            clientId: "61e831c1668fdc3ccb2f173a",
+        };
+
+        (function (d, s) {
+            var t = d.getElementsByTagName(s)[0],
+                e = d.createElement(s);
+            e.async = true;
+            e.src = "//static.axept.io/sdk.js";
+            t.parentNode.insertBefore(e, t);
+        })(document, "script");
+        void 0 === window._axcb && (window._axcb = []);
+        window._axcb.push(function (axeptio) {
+            axeptio.on("cookies:complete", function (choices) {
+
+            })
+        })
+    </script>
+</body>
+</html>

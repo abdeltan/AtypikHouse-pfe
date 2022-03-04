@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="row">
+                <h3>Mon Profile</h3>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.firstName }}" readonly>
+                        <label>Prénom</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.lastName }}" readonly>
+                        <label>Nom</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" disabled>
+                            <option value="{{ user.sex }}" selected>{{ user.sex }}</option>
+                        </select>
+                        <label>Sexe</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" value="{{ user.phone }}" readonly>
+                        <label>Tél</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" value="{{ user.email }}" readonly>
+                        <label>Email</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" value="{{ user.birthDate|date("Y-m-d") }}" readonly>
+                        <label>Date de naissance</label>
+                    </div>
+                </div>
+                <div class="col-6 align-content-center d-flex">
+                    <a class="btn btn-outline-success w-100" href="{{ path('edit-account') }}">Modifier</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-5 mt-md-0">
+            <div class="row">
+                <h3>Mon adresse</h3>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.addresse.streetNumber }}" readonly>
+                        <label>N° rue</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.addresse.streetName }}" readonly>
+                        <label>Rue</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.addresse.city }}" readonly>
+                        <label>Ville</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ user.addresse.codeZip }}" readonly>
+                        <label>Code postale</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" disabled>
+                            <option value="{{ user.addresse.country }}" selected>{{ user.addresse.country }}</option>
+                        </select>
+                        <label>Pays</label>
+                    </div>
+                </div>
+                <div class="col-6 align-content-center d-flex">
+                    <a href="{{ path('edit-address') }}" class="btn btn-outline-success w-100">Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+.rating {
+    display: -webkit-inline-box;
+    display: inline-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    cursor: default;
+    font-size: 16px;
+}
+
+.rating input {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.rating .stars {
+    margin: 0;
+    padding: 0;
+    list-style: none inside;
+    display: -webkit-box !important;
+    display: flex !important;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row nowrap;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.rating .stars,
+.rating .result,
+.rating .title {
+    display: block;
+    position: relative;
+}
+
+.rating .stars {
+    list-style: none inside;
+}
+
+.rating .stars {
+    cursor: default;
+}
+
+.rating:not(.static) .stars {
+    cursor: pointer;
+}
+
+.rating .stars li {
+    display: block;
+    position: relative;
+    color: #bebebe;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 24px;
+    -webkit-transition: color 0.3s linear;
+    transition: color 0.3s linear;
+}
+
+.rating .stars li.on,
+.rating .stars li.half::after {
+    color: #1d1d1d;
+}
+
+.rating .stars li::before {
+    position: absolute;
+    content: '\2605';
+    display: block;
+    z-index: 1;
+    left: 0;
+}
+
+.rating .result {
+    font-size: 0.8em;
+    margin-left: 10px;
+}

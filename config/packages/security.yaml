@@ -1,0 +1,47 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    enable_authenticator_manager: true
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        api:
+            pattern: ^/api/
+            stateless: true
+            provider: app_user_provider
+            jwt: ~
+
+        main:
+            form_login:
+                login_path: login
+                check_path: login
+                enable_csrf: true
+            user_checker: App\Security\UserChecker
+            remember_me:
+                secret: "%kernel.secret%"
+                lifetime: 604800
+                always_remember_me: true
+            logout:
+                path: logout
+            entry_point: form_login
+            json_login:
+                check_path: /authentication_token
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+    access_control:
+        - { path: ^/, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPERADMIN] }
+        - { path: ^/api, roles: ROLE_USER }
+        - { path: ^/authentication_token, roles: PUBLIC_ACCESS }

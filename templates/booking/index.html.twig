@@ -1,0 +1,252 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Réservation
+{% endblock title %}
+
+{% block body %}
+
+<div id="booking" class="container-fluid !direction !spacing">
+    <div class="row justify-content-center mx-0 p-0">
+        <div class="col-sm-12 col-md-10 col-lg-10 mt-5">
+            <div class="mb-5 p-4 bg-white shadow-sm">
+                <h3>Réservation</h3>
+                <div id="stepper1" class="bs-stepper linear">
+                    <div class="bs-stepper-header row" role="tablist">
+                        <div class="col-md-4 step active" data-target="#test-l-1">
+                            <button type="button" class="step-trigger" role="tab" id="stepper1trigger1"
+                                aria-controls="test-l-1" aria-selected="true">
+                                <span class="bs-stepper-circle">1</span>
+                                <span class="bs-stepper-label">Coordonnées</span>
+                            </button>
+                        </div>
+                        {# <div class="bs-stepper-line"></div> #}
+                        <div class="col-md-4 step" data-target="#test-l-2">
+                            <button type="button" class="step-trigger" role="tab" id="stepper1trigger2"
+                                aria-controls="test-l-2" aria-selected="false" disabled="disabled">
+                                <span class="bs-stepper-circle">3</span>
+                                <span class="bs-stepper-label">Récapitulatif</span>
+                            </button>
+                        </div>
+                        {# <div class="bs-stepper-line"></div> #}
+                        <div class="col-md-4 step" data-target="#test-l-3">
+                            <button type="button" class="step-trigger" role="tab" id="stepper1trigger3"
+                                aria-controls="test-l-3" aria-selected="false" disabled="disabled">
+                                <span class="bs-stepper-circle">3</span>
+                                <span class="bs-stepper-label">Paiement</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bs-stepper-content">
+                        <form id="payment-form" action="{{ path('payment') }}" method="post">
+                            <div id="test-l-1" role="tabpanel" class="bs-stepper-pane active dstepper-block"
+                                aria-labelledby="stepper1trigger1">
+                                <div class="row justify-center g-2 mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="dateStart" required
+                                                name="dateStart" value="{{ book.dateStart }}" readonly>
+                                            <label class="text-dark" for="dateStart">Date d'entrée</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="dateEnd" required name="dateEnd"
+                                                value="{{ book.dateEnd }}" readonly>
+                                            <label class="text-dark" for="dateEnd">Date de sortie</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="firstName" name="firstName"
+                                                required>
+                                            <label class="text-dark" for="firstName">Prénom</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                                required>
+                                            <label class="text-dark" for="lastName">Nom</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="capacity" name="capacity"
+                                                required value="{{ book.capacity }}" min="1" max="10" readonly>
+                                            <label class="text-dark" for="capacity">Nombre de personnes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                            <label class="text-dark" for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="tel" name="tel" required>
+                                            <label class="text-dark" for="tel">Téléphone</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex">
+                                        <a id="firststep"
+                                            class="btn btn-outline-secondary text-dark w-100 d-flex align-items-center justify-content-center"
+                                            onclick="stepper1.next()">Continuer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="test-l-2" role="tabpanel" class="bs-stepper-pane"
+                                aria-labelledby="stepper1trigger2">
+                                <div class="row justify-content-center g-2">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <img src="/images/gallery/{{ property.images[0].path }}" height="400"
+                                            class="w-100" alt="{{ property.title }}">
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-6 d-grid align-content-center">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <h2 class="text-dark fw-bold mb-3">{{ property.title }}</h2>
+                                            </div>
+                                            <p class="text-dark text-center">Du
+                                                <span class="text-dark fw-bold" id="recap_dateStart">Date
+                                                    d'entrée</span>
+                                                au
+                                                <span class="text-dark fw-bold" id="recap_dateEnd">Date de
+                                                    sortie</span></p>
+                                            <div class="col-sm-12 col-md-6">
+                                                <p class="text-dark text-center" for="recap_capacity">Occupants : <span
+                                                        class="text-dark fw-bold"
+                                                        id="recap_capacity">{{ book.capacity }}</span></p>
+
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <p class="text-dark text-center" for="recap_nights">Nombre de nuits :
+                                                    <span class="text-dark fw-bold"
+                                                        id="recap_nights">{{ book.nights }}</span>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <p class="text-dark text-center" for="recap_price_ht">Prix HT : <label
+                                                        class="text-dark fw-bold"
+                                                        id="recap_price_ht">{{ book.price }}€</label></p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <p class="text-dark text-center" for="recap_price_ht">TVA : <span
+                                                        class="text-dark fw-bold"
+                                                        id="recap_price_ht">{{ ttc - book.price }}€</span></p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <p class="text-dark text-center" for="recap_price_ttc">Prix TTC : <span
+                                                        class="text-dark fw-bold" id="recap_price_ttc">{{ ttc }}€</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center g-2 mt-3">
+                                    <div class="col-md-6 d-flex">
+                                        <a type="button"
+                                            class="btn btn-outline-secondary text-dark w-100 d-flex align-items-center justify-content-center"
+                                            onclick="stepper1.previous()">Retour</a>
+                                        <a type="button"
+                                            class="btn btn-outline-secondary text-dark w-100 ms-3 d-flex align-items-center justify-content-center"
+                                            onclick="stepper1.next()">Continuer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="test-l-3" role="tabpanel" class="bs-stepper-pane"
+                                aria-labelledby="stepper2trigger3">
+                                <div id="stripe-container" class="row justify-content-center m-0 p-0 my-5">
+                                    <div class="col-6 text-center">
+                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ stripe_public_key }}" data-name="{{ property.title }}"
+                                            data-description="Payer votre réservation du {{ property.title }}"
+                                            data-amount="{{ ttc * 100 }}" data-currency="eur">
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row justify-center g-2 mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" name="conditions"
+                                                id="conditions" required>
+                                            <label class="form-check-label" for="conditions">
+                                                Je confirme avoir pris connaissance et accepter les Conditions générales
+                                                de
+                                                vente et Conditions générales d'utilisation
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex">
+                                        <a type="button"
+                                            class="btn btn-outline-secondary d-flex align-items-center justify-content-center"
+                                            onclick="stepper1.previous()">Retour</a>
+                                        <input type="text" hidden name="price" value="{{ book.price }}">
+                                        <input type="text" hidden name="id" value="{{ property.id }}">
+                                        <button type="submit" class="btn btn-outline-dark  ms-3">
+                                            <span id="button-text">Payez maintenant</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('#firststep').click(function () {
+            $('input').each(function () {
+                $(`#recap_${$(this).attr('id')}`).text($(this).val());
+            });
+        });
+    });
+    var stepper1
+    var stepperForm
+    stepper1 = new Stepper(document.querySelector('#stepper1'))
+
+    var stepperFormEl = document.querySelector('#stepperForm')
+    stepperForm = new Stepper(stepperFormEl, {
+        animation: true
+    })
+
+    var btnNextList = [].slice.call(document.querySelectorAll('.btn-next-form'))
+    var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'))
+    var inputMailForm = document.getElementById('inputMailForm')
+    var inputPasswordForm = document.getElementById('inputPasswordForm')
+    var form = stepperFormEl.querySelector('.bs-stepper-content form')
+
+    btnNextList.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            stepperForm.next()
+        })
+    })
+
+    stepperFormEl.addEventListener('show.bs-stepper', function (event) {
+        form.classList.remove('was-validated')
+        var nextStep = event.detail.indexStep
+        var currentStep = nextStep
+
+        if (currentStep > 0) {
+            currentStep--
+        }
+
+        var stepperPan = stepperPanList[currentStep]
+
+        if ((stepperPan.getAttribute('id') === 'test-form-1' && !inputMailForm.value
+                .length) ||
+            (stepperPan.getAttribute('id') === 'test-form-2' && !inputPasswordForm.value
+                .length)) {
+            event.preventDefault()
+            form.classList.add('was-validated')
+        }
+    })
+</script>
+{% endblock %}

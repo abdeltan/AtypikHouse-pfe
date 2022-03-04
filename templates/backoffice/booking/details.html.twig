@@ -1,0 +1,74 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Réservation
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Détails de réservation</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 align-content-center d-flex">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date de réservation</th>
+                            <th scope="col">Nombre de personnes</th>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Date d'entée</th>
+                            <th scope="col">Date de sortie</th>
+                            <th scope="col">Prix HT</th>
+                            <th scope="col">Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{book.createdAt|date("m/d/Y à H:i:s") }}</td>
+                            <td>{{book.nbrPersonne }}</td>
+                            <td>{{book.firstName }} {{book.lastName }}</td>
+                            <td>{{book.startDate|date("m/d/Y") }}</td>
+                            <td>{{book.endDate|date("m/d/Y") }}</td>
+                            <td>{{book.priceHT }}€</td>
+                            <td>{{ (book.status)? 'Confirmée':'Annulée' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">Tél</th>
+                            <th scope="col">Méthode de paiement</th>
+                            <th scope="col">N° de transaction</th>
+                            <th scope="col">Nombre de personnes</th>
+                            <th scope="col">L'annonce</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{book.email }}</td>
+                            <td>{{book.tel }}</td>
+                            <td>{{book.paymentMethod }}</td>
+                            <td>{{book.bookNumber }}</td>
+                            <td>{{book.nbrPersonne}}</td>
+                            <td>{{book.reservedProperty.title}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-dark" href="{{ path('admin_booking_facture',{'book_number':book.bookNumber}) }}" role="button">facture</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

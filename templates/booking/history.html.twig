@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Réservations
+{% endblock title %}
+
+{% block body %}
+
+<div id="booking" class="container-fluid !direction !spacing">
+    <div class="row justify-content-center mx-0 p-0 mt-5">
+        <div class="col-sm-12 col-md-10 mb-3">
+            <h3>Réservations</h3>
+        </div>
+        {% for res in reservations %}
+        <div class="col-sm-12 col-md-10 col-lg-10 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="col-12 col-md-12 col-lg-3 mb-3 mb-md-0">
+                            <p class="fw-bold m-0">Réservation N°</p>{{ res.bookNumber }}
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-2 mb-3 mb-md-0">
+                            <p class="fw-bold m-0">Réservée</p>le {{ res.createdAt|date("m/d/Y à H:i:s") }}
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-2 mb-3 mb-md-0">
+                            <p class="fw-bold m-0">Prix TTC</p>{{ (res.priceHT + (res.priceHT * 0.2)) }}€
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-2 mb-3 mb-md-0">
+                            <p class="fw-bold m-0">Statut</p>
+                            <span class="badge rounded-pill {{ (res.status)? 'bg-success':'bg-danger' }}">
+                                {{ (res.status)? 'Confirmée':'Annulée' }}</span>
+                        </div>
+                        <div class="col-6 col-lg-2 d-flex justify-content-start align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('reservation_detail',{'book_number':res.bookNumber}) }}"
+                                    class="btn btn-outline-dark">Détails</a>
+                                <button type="button"
+                                    class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ path('booking_facture',{'book_number':res.bookNumber}) }}">Facture</a></li>
+                                    <li>
+                                        {% set difference = date(res.endDate).diff(date(res.startDate)) %}
+                                        {% set leftDays = difference.days %}
+                                        {% if leftDays > 2 and res.status == 1 %}
+                                        <a href="{{ path('cancel_book',{'book_number':res.bookNumber}) }}"
+                                            class="text-danger">Annuler</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

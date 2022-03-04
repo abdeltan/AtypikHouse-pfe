@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+
+<div id="home">
+    <div
+        class="row m-0 p-0 form-cover justify-content-center align-content-sm-start align-content-md-center mt-5 mt-md-0">
+        <form action="{{ path('properties') }}" class="col-sm-10 col-md-6 col-lg-4">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="textCity" name="city" placeholder="Paris">
+                <label class="text-dark" for="textCity">Ville</label>
+            </div>
+            <div class="form-floating">
+                <input type="number" class="form-control" id="textNumber" name="capacity" min="1" max="10"
+                    placeholder="1">
+                <label class="text-dark" for="textNumber">Nombre de personne</label>
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Rechercher</button>
+        </form>
+    </div>
+    <section class="py-5 text-center container">
+        <h1 class="fw-light mb-5">Dernières annonces</h1>
+        <div class="row justify-center mt-3">
+            {% if properties|length > 0 %}
+            {% for property in properties %}
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm">
+                    <div id="carouselExampleIndicators{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in property.images %}
+                            <div class="carousel-item {{ (loop.index == loop.first)? 'active' : '' }}">
+                                <img src="/images/gallery/{{ image.path }}" class="d-block w-100"
+                                    alt="{{ property.title }}">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselExampleIndicators{{ property.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carouselExampleIndicators{{ property.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ property.title }}</h5>
+                        <p class="card-text">{{ property.description|u.truncate(70,'...') }}</p>
+                        <p>
+                            <span class="badge rounded-pill bg-success">Capacité :
+                                {{ property.capacity }}</span>
+                            <span class="badge rounded-pill bg-warning text-dark">Nombre de chambres :
+                                {{ property.rooms }}</span>
+                            <span class="badge rounded-pill bg-primary">Nombre de pièces :
+                                {{ property.pieces }}</span>
+                            <span class="badge rounded-pill bg-info text-dark">Surface du logement :
+                                {{ property.superficie }}</span>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('property',{'id':property.id}) }}"
+                                    class="btn btn-sm btn-outline-secondary">Détails</a>
+                            </div>
+                            <small
+                                class="text-muted">{{ property.addresse.city }}&nbsp;({{ property.addresse.codeZip  }})</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row py-lg-5">
+            <div class="col-10 col-sm-10 col-lg-8 col-md-8 mx-auto">
+                <h2 class="fw-light mb-5">Pourquoi choisir AtypikHouse</h2>
+                <div class="lead text-muted fs-6">
+                    <p style="text-align: justify; ">AtypikHouse sélectionne pour vous des hébergements insolites
+                        partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
+                        le vertige dans une cabane à 12 mètres de hauteur, laissez-vous flotter sur une cabane au milieu
+                        d’un lac, observez les étoiles depuis votre lit dans une bulle .
+
+                        Grâce à nous, vous vivrez une véritable expérience hors du commun !
+
+                        Réservez instantanément votre coup de cœur directement en ligne depuis smartphone, tablette ou
+                        ordinateur. A moins de 2 heures de chez vous ou à l’autre bout de la France, vous êtes sûrs de
+                        trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            <div class="col">
+                <h2 class="fw-light mb-5">Carte des hébergements</h2>
+            </div>
+            <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZWxtYWhkaS1iZW5icmFoaW0iLCJhIjoiY2t4b290ZGhlMGtrZDJ2b2VtaHB6cXRqeSJ9.a7SmdbsO1IfjPJdHASuSyg';
+        const mapboxClient = mapboxSdk({
+            accessToken: mapboxgl.accessToken
+        });
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/elmahdi-benbrahim/ckza9k8p0002s15pcoi3jz4ev',
+            zoom: 3.56,
+            center: [7.191, 49.583]
+        });
+        var myHeaders = new Headers();
+        //myHeaders.append("Authorization", "Bearer {{ csrf_token('addresse') }}"); JWT
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("/api/addresses", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                let adds = JSON.parse(result);
+                adds.map((add) => {
+                    mapboxClient.geocoding
+                        .forwardGeocode({
+                            query: add.addresse,
+                            autocomplete: false,
+                        })
+                        .send()
+                        .then((response) => {
+                            if (
+                                !response ||
+                                !response.body ||
+                                !response.body.features ||
+                                !response.body.features.length
+                            ) {
+                                console.error('Invalid response:');
+                                console.error(response);
+                                return;
+                            }
+                            const feature = response.body.features[0];
+                            const popup = new mapboxgl.Popup({
+                                    closeOnClick: false
+                                })
+                                .setLngLat(feature.center)
+                                .setHTML(`<h6>${add.property}</h6>`);
+                            new mapboxgl.Marker().setPopup(popup).setLngLat(feature.center)
+                                .addTo(map);
+                        });
+                });
+
+            })
+            .catch(error => console.log('error', error));
+    });
+</script>
+{% endblock %}

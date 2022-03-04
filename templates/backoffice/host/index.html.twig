@@ -1,0 +1,84 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Hôtes
+{% endblock %}
+
+
+{% block content %}
+<div class="page-inner">
+    <h4 class="page-title">Hôtes</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if hosts|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Sexe</th>
+                            <th scope="col">Date de naissance</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Tél</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        {% for host in hosts %}
+                        <tr>
+                            <td>{{host.firstName }} {{host.lastName }}</td>
+                            <td>{{host.sex }}</td>
+                            <td>{{host.birthDate|date("m/d/Y à H:i:s") }}</td>
+                            <td>{{host.email }}</td>
+                            <td>{{host.phone }}</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                    href="{{ path('admin_edit_host',{'id':host.id}) }}"
+                                    role="button">Détails</a>
+                                 {#<button class="btn btn-danger rounded-pill" data-toggle="modal"
+                                    data-target="#delete-{{ hosts.id }}">Annuler</button>
+                                <!-- Delete -->
+                                <div class="modal fade" id="delete-{{ hosts.id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="addCategoryTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form
+                                                action="{{ path('admin_cancel_book',{'book_number':hosts.bookNumber}) }}"
+                                                method="post">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Réservation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Êtes-vous sur de vouloir d'annuler la réservation N°:
+                                                        <b>{{ hosts.bookNumber }}</b> ?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                                    <button type="button" class="btn btn-warning"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <!-- Delete -->#}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucun hôte</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

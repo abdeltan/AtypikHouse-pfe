@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Devenir hébergeur
+{% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid !direction !spacing">
+    <div class="row justify-content-center mx-0 p-0">
+        <div class="col-sm-12 col-md-8 col-lg-6 mt-5">
+            <div class="px-3 text-center">
+                <h1>Vous aussi devenez hôte sur AtypikHouse</h1>
+                <p class="lead">Rejoignez-nous.
+                    Nous vous accompagnons à chaque étape.</p>
+                <a class="btn btn-outline-success" href="{{ path('be-host') }}" role="button">C'est parti!</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

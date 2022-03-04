@@ -1,0 +1,14 @@
+leogout_seo:
+    general:
+        title: AtypikHouse
+        description: Vivez une nuit magique | Cabane dans les arbres | Bulles | Atypik House vous fait découvrir des hébergements insolite partout en europe | Pour un week end ou une retraite amoureuse choisisser l'hébergment insolite.
+        image: http://images.com/poneys/12/large # This one is shared by open graph and twitter only
+    basic:
+        title: AtypikHouse
+        keywords: nature, igloo, voyage france, bulles, vaccances, hébergement insolite, voyage europe, cabane
+    og:
+        type: website
+        url: http://test.com/articles
+    twitter:
+        card: summary
+        site: "@atypikhouse"

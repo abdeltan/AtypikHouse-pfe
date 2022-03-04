@@ -1,0 +1,120 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Mes Annonces
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Mes Annonces</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 mb-3">
+            <a class="btn btn-outline-primary float-right" href="{{ path('new-ad') }}" role="button">Créer une nouvelle
+                annonce</a>
+        </div>
+        <div class="col-sm-12">
+            {% if properties|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Superficie</th>
+                            <th scope="col">Capacité</th>
+                            <th scope="col">N° chambres</th>
+                            <th scope="col">N° pièces</th>
+                            <th scope="col">Eau</th>
+                            <th scope="col">Électricité</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for property in properties %}
+                        <tr>
+                            <td>{{ property.title }}</td>
+                            <td>{{ property.superficie }}</td>
+                            <td>{{ property.capacity }}</td>
+                            <td>{{ property.rooms }}</td>
+                            <td>{{ property.pieces }}</td>
+                            <td>{{ property.water }}</td>
+                            <td>{{ property.electricity }}</td>
+                            <td>
+                                <a href="{{ path('manage-ad',{'id' : property.id }) }}"
+                                    class="btn btn-icon btn-round btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <a href="{{ path('admin_availabilities',{'id' : property.id }) }}"
+                                    class="btn btn-icon btn-round btn-info btn-sm">
+                                    <i class="fas fa-calendar-minus"></i>
+                                </a>
+
+                                <button
+                                    class="btn btn-icon btn-round btn-{{ (property.status)? 'danger' : 'success' }} btn-sm"
+                                    data-toggle="modal" data-target="#delete-{{ property.id }}">
+                                    {% if property.status == 0 %}
+                                    <i class="fas fa-eye"></i>
+                                    {% else %}
+                                    <i class="fas fa-eye-slash"></i>
+                                    {% endif %}
+                                </button>
+                                <!-- Delete -->
+                                <div class="modal fade" id="delete-{{ property.id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="addCategoryTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form action="{{ path('admin_delete_ads',{'id':property.id}) }}"
+                                                method="post">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Visibilité de
+                                                        l'annonce
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Êtes-vous sur de vouloir changer le statut de l'annonce
+                                                        <b>{{ property.title }}</b> ?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="text" name="id" id="id" value="{{ property.id }}"
+                                                        hidden>
+                                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                                    <button type="button" class="btn btn-warning"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation d-flex justify-content-center">
+                    {{ knp_pagination_render(properties) }}
+                </div>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucune Annonce</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

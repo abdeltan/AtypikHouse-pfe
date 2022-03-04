@@ -1,0 +1,54 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Utilisateurs
+{% endblock %}
+
+
+{% block content %}
+<div class="page-inner">
+    <h4 class="page-title">Utilisateurs</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if users|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Sexe</th>
+                            <th scope="col">Date de naissance</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Tél</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for user in users %}
+                        <tr>
+                            <td>{{user.firstName }} {{user.lastName }}</td>
+                            <td>{{user.sex }}</td>
+                            <td>{{user.birthDate|date("m/d/Y à H:i:s") }}</td>
+                            <td>{{user.email }}</td>
+                            <td>{{user.phone }}</td>
+                            <td>{{(user.status)? 'Actif' : 'Banni' }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('admin_edit_user',{'id':user.id}) }}"
+                                    role="button">Modifier</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucun hôte</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

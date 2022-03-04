@@ -1,0 +1,109 @@
+{% extends "backoffice/base-bo.html.twig" %}
+
+{% block title %}Hôte{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <h2>Hôte</h2>
+            {{ form_start(hostForm) }}
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.firstName) }}
+                        {{ form_widget(hostForm.firstName) }}
+                        {{ form_errors(hostForm.firstName) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.lastName) }}
+                        {{ form_widget(hostForm.lastName) }}
+                        {{ form_errors(hostForm.lastName) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.sex) }}
+                        {{ form_widget(hostForm.sex) }}
+                        {{ form_errors(hostForm.sex) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.phone) }}
+                        {{ form_widget(hostForm.phone) }}
+                        {{ form_errors(hostForm.phone) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.email) }}
+                        {{ form_widget(hostForm.email) }}
+                        {{ form_errors(hostForm.email) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(hostForm.birthDate) }}
+                        {{ form_widget(hostForm.birthDate) }}
+                        {{ form_errors(hostForm.birthDate) }}
+                    </div>
+                </div>
+                <div class="col-12 align-content-center d-flex">
+                    <a href="{{ path('admin_host') }}" class="btn btn-outline-dark w-100 mr-3">Annuler</a>
+                    <button type="submit" class="btn btn-outline-success w-100">Modifier</button>
+                </div>
+            </div>
+            {{ form_end(hostForm) }}
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <h3>Adresse</h3>
+            {{ form_start(addressForm) }}
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(addressForm.street_number) }}
+                        {{ form_widget(addressForm.street_number) }}
+                        {{ form_errors(addressForm.street_number) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(addressForm.street_name) }}
+                        {{ form_widget(addressForm.street_name) }}
+                        {{ form_errors(addressForm.street_name) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(addressForm.city) }}
+                        {{ form_widget(addressForm.city) }}
+                        {{ form_errors(addressForm.city) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(addressForm.code_zip) }}
+                        {{ form_widget(addressForm.code_zip) }}
+                        {{ form_errors(addressForm.code_zip) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group mb-3">
+                        {{ form_label(addressForm.country) }}
+                        {{ form_widget(addressForm.country) }}
+                        {{ form_errors(addressForm.country) }}
+                    </div>
+                </div>
+                <div class="col-12 align-content-center d-flex">
+                    <a href="{{ path('admin_host') }}" class="btn btn-outline-dark w-100 mr-3">Annuler</a>
+                    <button type="submit" class="btn btn-outline-success w-100">Modifier</button>
+                </div>
+            </div>
+            {{ form_end(addressForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

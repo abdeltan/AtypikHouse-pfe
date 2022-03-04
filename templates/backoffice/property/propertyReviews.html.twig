@@ -1,0 +1,60 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Annonces avec les avis
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Annonces avec les avis</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if reviews|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Commentaire</th>
+                            <th scope="col">Nombre d'étoiles</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for review in reviews %}
+                        <tr>
+                            <td>{{ review.user.lastName }}</td>
+                            <td>{{ review.comment }}</td>
+                            <td>{{ review.rating }}</td>
+                            <td>
+                                <a class="btn btn-outline-danger"
+                                    href="{{ path('admin-remove-review',{'id':review.id}) }}"
+                                    role="button">Supprimer</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation d-flex justify-content-center">
+                    {{ knp_pagination_render(reviews) }}
+                </div>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Pas de données</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Propriétés{% endblock %}
+
+{% block body %}
+<div id="properties" class="container">
+    <form action="{{ path('properties') }}" class="row justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
+        <div class="col-md-4">
+            <div class="form-floating">
+                <select class="form-select" id="propertyType" name="propertyType" aria-label="Type d'hébergement">
+                    <option selected disabled>Type</option>
+                    {% for type in propertyType %}
+                    <option value="{{ type.id }}">{{ type.title }}</option>
+                    {% endfor %}
+                </select>
+                <label for="propertyType">Type d'hébergement</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="ville" name="city" placeholder="Paris">
+                <label for="ville">Ville</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="number" class="form-control" id="prixMin" name="prixMin" placeholder="400">
+                <label for="prixMin">Prix Min</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="number" class="form-control" id="prixMax" name="prixMax" placeholder="400">
+                <label for="prixMax">Prix Max</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="number" class="form-control" id="textNumber" name="capacity" placeholder="1">
+                <label class="text-dark" for="textNumber">Nombre de personne</label>
+            </div>
+        </div>
+        <div class="col-md-4 align-content-center d-flex">
+            <button type="submit" class="btn btn-outline-success w-100">Rechercher</button>
+        </div>
+    </form>
+
+    <div class="row justify-center mt-3">
+        {% if properties|length > 0 %}
+        {% for property in properties %}
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <div id="carouselExampleIndicators{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in property.images %}
+                        <div class="carousel-item {{ (loop.index == loop.first)? 'active' : '' }}">
+                            <img src="images/gallery/{{ image.path }}" class="d-block w-100" alt="{{ property.title }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#carouselExampleIndicators{{ property.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#carouselExampleIndicators{{ property.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ property.title }}</h5>
+                    <p class="card-text">{{ property.description|u.truncate(80,'...') }}</p>
+                    <p>
+                        <span class="badge rounded-pill bg-success">Capacité : {{ property.capacity }}</span>
+                        <span class="badge rounded-pill bg-warning text-dark">Nombre de chambres :
+                            {{ property.rooms }}</span>
+                        <span class="badge rounded-pill bg-primary">Nombre de pièces : {{ property.pieces }}</span>
+                        <span class="badge rounded-pill bg-info text-dark">Surface du logement :
+                            {{ property.superficie }}</span>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{{ path('property',{'id':property.id}) }}"
+                                class="btn btn-sm btn-outline-secondary">Détails</a>
+                        </div>
+                        <small
+                            class="text-muted">{{ property.addresse.city }}&nbsp;({{ property.addresse.codeZip  }})</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        $("#dateStart").attr("min", date);
+    });
+</script>
+{% endblock %}

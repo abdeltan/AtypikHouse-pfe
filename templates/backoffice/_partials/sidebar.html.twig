@@ -1,0 +1,89 @@
+<!-- Sidebar -->
+<div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-primary">
+                <li class="nav-item">
+                    <a href="{{ path('home') }}">
+                        <i class="fad fa-browser"></i>
+                        <p>
+                            Retour au site
+                        </p>
+                    </a>
+                </li>
+                {% if "ROLE_ADMIN" in app.user.roles %}
+                <li class="nav-item">
+                    <a href="{{ path('ads') }}">
+                        <i class="fas fa-ad"></i>
+                        <p>
+                            Annonces
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('admin_bookings') }}">
+                        <i class="far fa-calendar-check"></i>
+                        <p>
+                            Réservations
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('admin_message') }}">
+                        <i class="fal fa-comments-alt"></i>
+                        <p>
+                            Messages
+                        </p>
+                    </a>
+                </li>
+                {% elseif "ROLE_SUPERADMIN" in app.user.roles %}
+
+                <li class="nav-item">
+                    <a href="{{ path('admin_host') }}">
+                        <i class="far fa-suitcase"></i>
+                        <p>
+                            Hôtes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('admin_crm') }}">
+                        <i class="fal fa-cogs"></i>
+                        <p>
+                            propriétés dynamiques
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('admin-reviews') }}">
+                        <i class="fal fa-comments-alt"></i>
+                        <p>
+                            Avis et commentaires
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('admin_user') }}">
+                        <i class="far fa-users"></i>
+                        <p>
+                            Utilisateurs
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('admin_contact') }}">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <p>
+                            Contacts
+                        </p>
+                    </a>
+                </li>
+                {% endif %}
+                <hr class="my-1">
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Sidebar -->

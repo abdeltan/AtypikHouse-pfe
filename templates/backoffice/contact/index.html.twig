@@ -1,0 +1,58 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Contacts
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Contacts</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if contacts|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.message }}</td>
+                            <td>
+                                <a href="{{ path('admin_read_contact',{'id':contact.id}) }}"
+                                    class="btn btn-outline-danger rounded">
+                                    Définir comme lu
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucun nouveau message</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

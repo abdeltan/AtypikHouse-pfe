@@ -1,0 +1,53 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Messages
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Messages</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if properties|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Annonce</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for property in properties %}
+                        {% for message in property.messages %}
+                        <tr>
+                            <td>{{ message.user.firstName }}&nbsp;{{ message.user.lastName }}</td>
+                            <td>{{ message.message }}</td>
+                            <td>{{ property.title }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucune Annonce</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

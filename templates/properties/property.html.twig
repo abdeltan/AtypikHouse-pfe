@@ -1,0 +1,260 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Propriétés{% endblock %}
+
+
+{% block body %}
+<div id="property">
+    <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            {% for image in property.images %}
+            <button type="button" data-bs-target="#propertyCarousel" data-bs-slide-to="{{ loop.index }}" class="active"
+                aria-current="true" aria-label="Slide {{ loop.index }}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for image in property.images %}
+            <div class="carousel-item {{ (loop.first)? 'active':'' }}">
+                <img src="/images/gallery/{{ image.path }}" class="d-block w-100" alt="{{ property.title }}">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="container !direction !spacing">
+        <form action="{{ path('book',{'id':property.id}) }}" method="POST" class="row justify-center g-2 mt-3">
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input type="date" class="form-control datepicker" id="dateStart" name="dateStart"
+                        placeholder="01/01/2022" required>
+                    <label class="text-dark" for="dateStart">Date d'entrée</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input type="date" class="form-control datepicker" id="dateEnd" name="dateEnd"
+                        placeholder="15/01/2022" required>
+                    <label class="text-dark" for="dateEnd">Date de sortie</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="textNumber" name="capacity" min="1"
+                        max="{{ property.capacity }}" value="1" placeholder="1" required>
+                    <label class="text-dark" for="textNumber">Nombre de personne</label>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <input type="text" name="price" id="price" value="{{ property.price }}" hidden>
+                <input type="text" name="nights" id="nights" value="1" hidden>
+                <button type="submit" class="btn btn-outline-secondary text-dark w-100">Réserver à partir de
+                    <b>{{ property.price }}€</b> /
+                    nuit</button>
+            </div>
+        </form>
+        <div class="row justify-content-center mt-5">
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-house-flood fa-icon"></i>
+                <p>{{ property.propertyType.title }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-users fa-icon"></i>
+                <p>{{ property.capacity }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-draw-square fa-icon"></i>
+                <p>{{ property.superficie }} m2</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-dewpoint fa-icon"></i>
+                <p>{{ (property.water)? 'Oui':'Non' }}</p>
+            </div>
+            <div class="col-6 col-md-2 text-center">
+                <i class="fad fa-bolt  fa-icon"></i>
+                <p>{{ (property.electricity)? 'Oui':'Non' }}</p>
+            </div>
+        </div>
+        <div class="row bg-light rounded-3 my-5 p-5">
+            <h2 class="mb-3">Équipements et autre détails</h2>
+            {% for equipment in property.equipments %}
+            <div class="col-sm-12 col-md-3">
+                <span class="text-muted">{{ equipment.title }}</span>
+                <p class="fw-bold">{{ equipment.value }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 mt-3">
+                <div id="map" class="h-100 p-5 text-white bg-dark rounded-3"></div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Déscription</h2>
+                    {{ property.description }}
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6 order-sm-1 order-2 mt-3">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Les inclus</h2>
+                    <p>{{ property.getIncludes() }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3 order-1">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Les activités du domaine</h2>
+                    <p>{{ property.getActivities() }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6 mt-3">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Literie</h2>
+                    <p>{{ property.getLiterie() }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Sanitaires</h2>
+                    <p>{{ property.getSanitaire() }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-stretch mt-3">
+            {% if app.user != null  %}
+            <div class="col-md-6 mt-3">
+                <form action="{{ path('addReview',{'id':property.id}) }}" method="post">
+                    <h2 class="pb-2 border-bottom mb-3">Donnez votre avis</h2>
+                    <div class="form-floating mb-3">
+                        <input readonly value="{{ app.user.lastName }}" type="text" class="form-control" id="nom">
+                        <label for="nom">Nom</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" required name="comment" placeholder="Laissez un commentaire ici"
+                            id="comment" style="height: 100px"></textarea>
+                        <label for="comment">Commentaire</label>
+                    </div>
+                    <div class="form-group mt-3 d-grid">
+                        <label class="control-label" for="message">Votre note</label>
+                        <input data-role="rating" name="rating" data-value="5" data-values="1, 2, 3, 4, 5">
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark mt-3">Envoyer</button>
+                </form>
+            </div>
+            {% endif %}
+            <div class="col-md-6 mt-3">
+                <h2 class="pb-2 border-bottom mb-3">Quelques avis</h2>
+                {% if property.reviews|length > 0 %}
+                {% for review in property.reviews %}
+                {% if loop.index <= 8 %}
+                <div class="col d-flex align-items-start">
+                    <div>
+                        <h4 class="fw-bold mb-0">{{review.user.lastName}}</h4>
+                        <p>{{review.comment}}</p>
+                        <input data-role="rating" name="rating" data-static="true" data-value="{{review.rating}}"
+                            data-values="1, 2, 3, 4, 5">
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% if app.user != null  %}
+        <div class="row justify-content-center align-items-md-stretch">
+            <div class="col-md-6 mt-3">
+                <form action="{{ path('property_message',{'id':property.id}) }}" method="post">
+                    <h2 class="pb-2 border-bottom mb-3">Contactez le propriétaire</h2>
+                    <div class="form-floating mb-3">
+                        <input readonly value="{{ app.user.lastName }}" type="text" class="form-control" id="nom">
+                        <label for="nom">Nom</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" required name="message" placeholder="Laissez un message ici"
+                            id="message" style="height: 100px"></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark mt-3">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var adresse =
+            "{{ property.addresse.streetNumber }} {{ property.addresse.streetName }},{{ property.addresse.city }},{{ property.addresse.country }}";
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZWxtYWhkaS1iZW5icmFoaW0iLCJhIjoiY2t4b290ZGhlMGtrZDJ2b2VtaHB6cXRqeSJ9.a7SmdbsO1IfjPJdHASuSyg';
+        const mapboxClient = mapboxSdk({
+            accessToken: mapboxgl.accessToken
+        });
+        mapboxClient.geocoding
+            .forwardGeocode({
+                query: adresse,
+                autocomplete: false,
+                limit: 2
+            })
+            .send()
+            .then((response) => {
+                if (
+                    !response ||
+                    !response.body ||
+                    !response.body.features ||
+                    !response.body.features.length
+                ) {
+                    console.error('Invalid response:');
+                    console.error(response);
+                    return;
+                }
+                const feature = response.body.features[0];
+
+                const map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: feature.center,
+                    zoom: 10
+                });
+                new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+            });
+        $('input').change(function () {
+            try {
+                let dateStart = moment($('#dateStart').val(), "YYYY/MM/DD");
+                let dateEnd = moment($('#dateEnd').val(), "YYYY/MM/DD");
+                let nights = moment.duration(dateEnd.diff(dateStart)).asDays();
+                if (nights > 0) {
+                    let nightPrice = "{{ property.price }}";
+                    let price_ht = parseFloat(nights * parseFloat(nightPrice));
+                    $('#price').val(price_ht);
+                    $('#nights').val(nights);
+                    $('button[type="submit"]').html(`Réserver à partir de <b>${ price_ht }€</b> /nuit`);
+                } else if (nights < 1 && $('#dateStart').val() && $('#dateEnd').val()) {
+                    Swal.fire({
+                        type: "error",
+                        html: "Veuillez choisir des dates raisonnables"
+                    });
+                    $('#dateStart').val("");
+                    $('#dateEnd').val("");
+                }
+            } catch (ex) {
+                console.log(ex);
+            } finally {}
+
+        });
+    });
+</script>
+{% endblock %}

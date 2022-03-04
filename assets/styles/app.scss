@@ -1,0 +1,43 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bs-stepper/dist/css/bs-stepper.min.css";
+@import "header.scss";
+@import "footer.scss";
+@import "./Home/home.scss";
+@import "./property/property.scss";
+@import "./Booking/booke.scss";
+@import "./rating.scss";
+@import "./contact/Contact-Form-Clean.css";
+@import "./contact/Registration-Form-with-Photo.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    width: 100%;
+}
+
+#map {
+    min-width: 100%;
+    min-height: 300px;
+}
+
+img {
+    object-fit: contain;
+}
+
+.carousel-inner img {
+    object-fit: cover !important;
+}

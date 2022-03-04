@@ -1,0 +1,112 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Mes Annonces
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-inner">
+    <h4 class="page-title">Les dates de non disponibilité</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {{ form_start(unAvailabilityForm) }}
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(unAvailabilityForm.start_date) }}
+                        {{ form_widget(unAvailabilityForm.start_date) }}
+                        {{ form_errors(unAvailabilityForm.start_date) }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {{ form_label(unAvailabilityForm.end_date) }}
+                        {{ form_widget(unAvailabilityForm.end_date) }}
+                        {{ form_errors(unAvailabilityForm.end_date) }}
+                    </div>
+                </div>
+                <div class="col-6 align-content-center d-flex">
+                    <button type="submit" class="btn btn-outline-success w-100">Enregister</button>
+                </div>
+            </div>
+            {{ form_end(unAvailabilityForm) }}
+        </div>
+        <div class="col-sm-12 mt-5">
+            {% if property.unavailabilities|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Annonce</th>
+                            <th scope="col">Date de début</th>
+                            <th scope="col">Date de fin</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for unavailabily in property.unavailabilities %}
+                        <tr>
+                            <td>{{ property.title }}</td>
+                            <td>{{ unavailabily.startDate|date("m/d/Y") }}</td>
+                            <td>{{ unavailabily.endDate|date("m/d/Y") }}</td>
+                            <td>
+                                <button class="btn btn-icon btn-round btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#delete-{{ unavailabily.id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <!-- Delete -->
+                                <div class="modal fade" id="delete-{{ unavailabily.id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="addCategoryTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form action="{{ path('admin_delete_availability',{'id':unavailabily.id}) }}" method="post">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                                        Suppression des dates de non disponibilité
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Êtes-vous sur de vouloir supprimer?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="text" name="id" id="id" value="{{ unavailabily.id }}"
+                                                        hidden>
+                                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                                    <button type="button" class="btn btn-warning"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucune date</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script></script>
+
+{% endblock %}

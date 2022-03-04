@@ -1,0 +1,92 @@
+{% extends "backoffice/base-bo.html.twig" %}
+{% block title %}
+Réservations
+{% endblock %}
+
+
+{% block content %}
+<div class="page-inner">
+    <h4 class="page-title">Réservations</h4>
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            {% if properties|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date de réservation</th>
+                            <th scope="col">Nombre de personnes</th>
+                            <th scope="col">Nom complet</th>
+                            <th scope="col">Date d'entée</th>
+                            <th scope="col">Date de sortie</th>
+                            <th scope="col">Prix HT</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for property in properties %}
+                        {% if property.bookings|length > 0 %}
+                        {% for book in property.bookings %}
+                        <tr>
+                            <td>{{book.createdAt|date("m/d/Y à H:i:s") }}</td>
+                            <td>{{book.nbrPersonne }}</td>
+                            <td>{{book.firstName }} {{book.lastName }}</td>
+                            <td>{{book.startDate|date("m/d/Y") }}</td>
+                            <td>{{book.endDate|date("m/d/Y") }}</td>
+                            <td>{{book.priceHT }}€</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                    href="{{ path('admin_booking',{'book_number':book.bookNumber}) }}"
+                                    role="button">Détails</a>
+                                {% set difference = date(book.endDate).diff(date(book.startDate)) %}
+                                {% set leftDays = difference.days %}
+                                {% if book.status == 1 and leftDays >= 1 %}
+                                <button class="btn btn-danger rounded-pill" data-toggle="modal"
+                                    data-target="#delete-{{ book.id }}">Annuler</button>
+                                <!-- Delete -->
+                                <div class="modal fade" id="delete-{{ book.id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="addCategoryTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form
+                                                action="{{ path('admin_cancel_book',{'book_number':book.bookNumber}) }}"
+                                                method="post">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Réservation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Êtes-vous sur de vouloir d'annuler la réservation N°:
+                                                        <b>{{ book.bookNumber }}</b> ?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                                    <button type="button" class="btn btn-warning"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete -->
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="p-5 my-5">
+                <h2 class="text-center">Aucune Réservation</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
