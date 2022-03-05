@@ -56,32 +56,32 @@
                 <h3>Mon adresse</h3>
                 <div class="col-6">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" value="{{ user.addresse.streetNumber }}" readonly>
+                        <input type="text" class="form-control" value="{{ user.addresse.streetNumber ?? '' }}" readonly>
                         <label>N° rue</label>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" value="{{ user.addresse.streetName }}" readonly>
+                        <input type="text" class="form-control" value="{{ user.addresse.streetName ?? '' }}" readonly>
                         <label>Rue</label>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" value="{{ user.addresse.city }}" readonly>
+                        <input type="text" class="form-control" value="{{ user.addresse.city  ?? '' }}" readonly>
                         <label>Ville</label>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" value="{{ user.addresse.codeZip }}" readonly>
+                        <input type="text" class="form-control" value="{{ user.addresse.codeZip ?? ''}}" readonly>
                         <label>Code postale</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating mb-3">
                         <select class="form-select" disabled>
-                            <option value="{{ user.addresse.country }}" selected>{{ user.addresse.country }}</option>
+                            <option value="{{ user.addresse.country ?? 'FR' }}" selected>{{ user.addresse.country ?? 'FR' }}</option>
                         </select>
                         <label>Pays</label>
                     </div>

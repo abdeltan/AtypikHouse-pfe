@@ -30,10 +30,12 @@ class UserController extends AbstractController
         $address = ($this->getUser()->getAddresse() !== null) ? $this->getUser()->getAddresse() : new Addresse();
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
-
+        $user = $this->getUser();
+        $user->setAddresse($address);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->persist($address);
+            $entityManager->persist($user);
             $entityManager->flush();
 
             $this->addFlash("success", "Modifié avec succès");
