@@ -22,8 +22,8 @@ class MailerController extends AbstractController
                     ],
                     'To' => [
                         [
-                            'Email' => "benbrahim.elmahdi@gmail.com",
-                            'Name' => "El Mahdi"
+                            'Email' => "abdelilah.tanouti@gmail.com",
+                            'Name' => "Abdelilah"
                         ]
                     ],
                     'Subject' => "Greetings from Mailjet.",

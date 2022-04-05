@@ -21,13 +21,13 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $user = new User();
-        $user->setFirstName('El Mahdi');
-        $user->setLastName('Benbrahim');
+        $user->setFirstName('Abdelilah');
+        $user->setLastName('Tanouti');
         $user->setSex('Homme');
-        $user->setPhone('0769242104');
-        $user->setEmail('benbrahim.elmahdi@gmail.com');
+        $user->setPhone('0762382245');
+        $user->setEmail('abdelilah.tanouti@gmail.com');
         $user->setPassword(
-            $this->passwordHasher->hashPassword($user, 'benbrahim.elmahdi@gmail.com')
+            $this->passwordHasher->hashPassword($user, 'abdelilah.tanouti@gmail.com')
         );
         $user->setRoles(array('ROLE_ADMIN'));
         $user->setStatus(true);

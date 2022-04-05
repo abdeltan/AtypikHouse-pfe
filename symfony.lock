@@ -16,14 +16,20 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
-    "components/bootstrap": {
-        "version": "3.4.1"
-    },
-    "components/jquery": {
-        "version": "3.6.0"
-    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.4"
+    },
+    "dama/doctrine-test-bundle": {
+        "version": "6.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "56eaa387b5e48ebcc7c95a893b47dfa1ad51449c"
+        },
+        "files": [
+            "./config/packages/test/dama_doctrine_test_bundle.yaml"
+        ]
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -126,9 +132,6 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
-    "eternicode/bootstrap-datepicker": {
-        "version": "v1.9.0"
-    },
     "fakerphp/faker": {
         "version": "v1.16.0"
     },
@@ -184,9 +187,6 @@
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
-    },
-    "kriswallsmith/assetic": {
-        "version": "v1.0.5"
     },
     "laminas/laminas-code": {
         "version": "4.4.3"
@@ -343,9 +343,6 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
-    },
-    "robloach/component-installer": {
-        "version": "0.0.12"
     },
     "sabberworm/php-css-parser": {
         "version": "8.4.0"

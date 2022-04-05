@@ -19,7 +19,7 @@ class AdminUserFormType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Préonom'
+                'label' => 'Prénom'
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Nom'
