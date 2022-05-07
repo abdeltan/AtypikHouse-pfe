@@ -8,6 +8,7 @@ use DateTime;
 
 class LoginTest extends WebTestCase
 {
+
     public function testLogin(): void
     {
         $client = static::createClient();
@@ -26,9 +27,18 @@ class LoginTest extends WebTestCase
         $manager->persist($user);
         $manager->flush();
 
-        $crawler = $client->request('GET', '/');
+        $client->loginUser($user);
+
+        $client->request('GET', '/mon-profile');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello World');
+
+        $client->request('GET', '/logout');
+
+        $this->assertResponseRedirects();
+
+        $client->request('GET', '/login');
+
+        $this->assertSelectorExists('h1','Connexion');
     }
 }

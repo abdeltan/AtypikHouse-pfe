@@ -16,6 +16,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
+    public const LOGIN_ROUTE = 'login';
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -29,6 +30,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request): bool
     {
+        // return self::LOGIN_ROUTE === $request->attributes->get('_route')
+        //     && $request->isMethod('POST');
         return $request->headers->has('X-AUTH-TOKEN');
     }
 
@@ -85,7 +88,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     /**
      * Called when authentication is needed, but it's not sent
-     */             
+     */
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         $data = [
