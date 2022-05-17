@@ -20,9 +20,16 @@
             </div>
         </div>
         <div class="col-12 text-center subfooter">
-            <p class="text-dark mt-3">©2022 <b>AtypikHouse</b> Tous droits réservés. AtypikHouse n’est pas une
+            <p class="text-dark mt-3 copyright">&copy; copyright 2021&mdash;<span id="curYr"></span> AtypikHouse Tous droits réservés. AtypikHouse n’est pas une
                 agence de voyage et
                 ne facture aucun frais de service pour les utilisateurs de notre site.</p>
-        </div>
+        </div> 
+        <script>
+            const date = new Date();
+            const year = date.getFullYear();
+            document.getElementById('curYr').innerHTML=year;
+
+        </script>
+        
     </div>
 </footer>
