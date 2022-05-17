@@ -1,4 +1,4 @@
-<footer id="footer" class="footer mt-auto pt-3 bg-light">
+<footer id="footer" class="footer mt-auto pt-3 bg-info">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 text-center">
@@ -11,9 +11,10 @@
         </div>
         <div class="row justify-content-center text-center subfooter">
             <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="#">Qui sommes-nous ? </a></div>
-            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="#">Mentions légales</a></div>
-            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="#">Confidentialité</a></div>
-            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="#">Responsabilités</a></div>
+            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="{{ path('app_mention_legal')}}">Mentions légales</a></div>
+            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="{{ path('app_confidentialite')}}">Confidentialité</a></div>
+            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="{{ path('app_conditions_generales_de_vente') }}">Conditions générales de vente</a></div>
+            <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="{{ path('app_conditions_generales_de_reservation') }}">Conditions générales de résérvation</a></div>
             <div class="col-6 col-md-auto"><a class="nav-link text-dark" href="{{ path('contact') }}">Contactez-nous</a>
             </div>
         </div>
