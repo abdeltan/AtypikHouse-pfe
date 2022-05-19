@@ -3,25 +3,42 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
+<style>
+    h1 {
+        border-bottom-style: solid;
+        border-bottom-width: medium;
+      }
+</style>
 
 <div id="home">
     <div
-        class="row m-0 p-0 form-cover justify-content-center align-content-sm-start align-content-md-center mt-5 mt-md-0">
-        <form action="{{ path('properties') }}" class="col-sm-10 col-md-6 col-lg-4">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="textCity" name="city" placeholder="Paris">
-                <label class="text-success" for="textCity">Ville</label>
-            </div>
-            <div class="form-floating">
-                <input type="number" class="form-control" id="textNumber" name="capacity" min="1" max="10"
-                    placeholder="1">
-                <label class="text-success" for="textNumber">Nombre de personne</label>
-            </div>
-            <button type="submit" class="btn btn-success mt-3">Recherche</button>
-        </form>
+    class="bg-image d-flex justify-content-center align-items-center"
+    style="
+      background-image: url(../../../images/uii.jpg);
+      height: 90vh;
+      
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+    "
+  >
+  <form action="{{ path('properties') }}" class="col-sm-10 col-md-6 col-lg-4">
+    
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="textCity" name="city" placeholder="Paris">
+        <label class="text-dark" for="textCity">Ville</label>
     </div>
+    <div class="form-floating">
+        <input type="number" class="form-control" id="textNumber" name="capacity" min="1" max="10"
+            placeholder="1">
+        <label class="text-dark" for="textNumber">Nombre de personne</label>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Recherche</button>
+</form>
+  </div>
     <section class="py-5 text-center container">
-        <h1 class="fw-light mb-5">Dernières annonces</h1>
+        <h1 class="fw-light mb-5  text-info bg-dark">Dernières annonces</h1>
         <div class="row justify-center mt-3">
             {% if properties|length > 0 %}
             {% for property in properties %}
@@ -74,9 +91,9 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="row py-lg-5">
-            <div class="col-10 col-sm-10 col-lg-8 col-md-8 mx-auto">
-                <h2 class="fw-light mb-5">Pourquoi choisir AtypikHouse</h2>
+        <div class="row py-lg-5 ">
+            <div class="mx-auto">
+                <h1 class="fw-light mb-5 text-info bg-dark">Pourquoi choisir AtypikHouse</h1>
                 <div class="lead text-muted fs-6">
                     <p style="text-align: justify; ">AtypikHouse sélectionne pour vous des hébergements insolites
                         partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
@@ -91,10 +108,8 @@
                 </div>
             </div>
         </div>
+        <h1 class="fw-light mb-5  text-info bg-dark">Carte des hébergements</h1>
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            <div class="col">
-                <h2 class="fw-light mb-5">Carte des hébergements</h2>
-            </div>
             <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
             </div>
         </div>
