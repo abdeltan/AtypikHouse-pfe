@@ -11,6 +11,7 @@ Réservations
         <div class="col-sm-12 col-md-10 mb-3">
             <h3>Réservations</h3>
         </div>
+        {% if reservations|length >0 %}
         {% for res in reservations %}
         <div class="col-sm-12 col-md-10 col-lg-10 mb-3">
             <div class="card">
@@ -57,6 +58,12 @@ Réservations
             </div>
         </div>
         {% endfor %}
+        {% else %}
+            <div class="alert alert-warning text-center" role="alert">
+                <strong>Vous n'avez aucune réservation </strong>
+            </div>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

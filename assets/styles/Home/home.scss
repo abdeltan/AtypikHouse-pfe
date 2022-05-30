@@ -1,7 +1,7 @@
 #home {
     
     .form-cover {
-        background-image: url('../../../public/images/uii.jpg');
+        background-image: url('../../../public/images/proche-de-la-nature.jpg');
         color: hsla(0, 0%, 100%, .6);
         position: relative;
         background-position: 50%;
@@ -29,6 +29,9 @@
     #bookingInstantly {
         background-image: url('../../../public/images/speed.png');
     }
-
+    img.d-block {
+        width: 200px;
+        height: 200px;
+    }
     
 }
