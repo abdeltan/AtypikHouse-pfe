@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     public function index(PropertyRepository $propertyRepository, AddresseRepository $addresseRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'properties' => $propertyRepository->findLastThree(),
+            'properties' => $propertyRepository->findLastNine(),
         ]);
     }
 

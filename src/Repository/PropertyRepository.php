@@ -111,4 +111,20 @@ class PropertyRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+
+    /**
+     * @return Property[] Returns an array of Property objects
+     */
+
+    public function findLastNine()
+    {
+        return $this
+            ->createQueryBuilder("p")
+            ->where("p.addresse IS NOT NULL")
+            ->orderBy("p.id", "DESC")
+            ->setMaxResults(9)
+            ->getQuery()
+            ->getResult();
+    }
 }
