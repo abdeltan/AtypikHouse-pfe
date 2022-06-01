@@ -5,7 +5,7 @@
 {% block body %}
 <style>
     body{
-        background-color:whitesmoke;
+        background-color:#FFFAF0;
     }
     h1 {
         border-bottom-style: solid;
@@ -41,7 +41,27 @@
 </form>
   </div>
     <section class="py-5 text-center container">
-        <h1 class="fw-light mb-5  text-info bg-dark">Dernières annonces</h1>
+        <div class="row py-lg-5 ">
+            <div class="mx-auto">
+                <h1 class="fw-light mb-5 text-success bg-dark">Pourquoi choisir AtypikHouse</h1>
+                <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                    <source src="../../video/ATYPIK.mp4" type="video/mp4" >
+                  </video>
+                <div class="lead text-muted fs-6"><br>
+                    <p style="text-align: justify; ">AtypikHouse sélectionne pour vous des hébergements insolites
+                        partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
+                        le vertige dans une cabane à 12 mètres de hauteur, laissez-vous flotter sur une cabane au milieu
+                        d’un lac, observez les étoiles depuis votre lit dans une bulle .
+
+                        Grâce à nous, vous vivrez une véritable expérience hors du commun !
+
+                        Réservez instantanément votre coup de cœur directement en ligne depuis smartphone, tablette ou
+                        ordinateur. A moins de 2 heures de chez vous ou à l’autre bout de la France, vous êtes sûrs de
+                        trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</p>
+                </div>
+            </div>
+        </div>
+        <h1 class="fw-light mb-5  text-light bg-dark">Dernières annonces</h1>
         <div class="row justify-center mt-3">
             {% if properties|length > 0 %}
             {% for property in properties %}
@@ -94,24 +114,8 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="row py-lg-5 ">
-            <div class="mx-auto">
-                <h1 class="fw-light mb-5 text-info bg-dark">Pourquoi choisir AtypikHouse</h1>
-                <div class="lead text-muted fs-6">
-                    <p style="text-align: justify; ">AtypikHouse sélectionne pour vous des hébergements insolites
-                        partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
-                        le vertige dans une cabane à 12 mètres de hauteur, laissez-vous flotter sur une cabane au milieu
-                        d’un lac, observez les étoiles depuis votre lit dans une bulle .
-
-                        Grâce à nous, vous vivrez une véritable expérience hors du commun !
-
-                        Réservez instantanément votre coup de cœur directement en ligne depuis smartphone, tablette ou
-                        ordinateur. A moins de 2 heures de chez vous ou à l’autre bout de la France, vous êtes sûrs de
-                        trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</p>
-                </div>
-            </div>
-        </div>
-        <h1 class="fw-light mb-5  text-info bg-dark">Carte des hébergements</h1>
+        
+        <h1 class="fw-light mb-5  text-light bg-dark">Carte des hébergements</h1>
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
             <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
             </div>
