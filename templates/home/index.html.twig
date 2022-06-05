@@ -7,7 +7,7 @@
     body{
         background-color:#FFFAF0;
     }
-    h1 {
+    h2 {
         border-bottom-style: solid;
         border-bottom-width: medium;
       }
@@ -28,8 +28,8 @@
     "
   >
   <form action="{{ path('properties') }}" id="properties" class="row justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
-    <h2 class="h1 text-center "><u>AtypikHouse</u></h2>
-    <div class="col-md-4">
+    <h1 class="h1 text-center  "><b class="text-dark">Commencez <br> votre <br>histoire <br>avec <br> </b><b class="text-success"> LA N A T U R E</b></h1>
+    <div class="col-md-4"></b>
         <div class="form-floating">
             <select class="form-select" id="propertyType" name="propertyType" aria-label="Type d'hébergement">
                 <option selected disabled>Type</option>
@@ -76,12 +76,13 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5 ">
             <div class="mx-auto">
-                <h1 class="fw-light mb-5 text-success bg-dark">Pourquoi choisir AtypikHouse</h1>
-                <video playsinline="playsinline" width="100%" autoplay="autoplay" muted="muted" loop="loop">
+                <h2 class="fw-light mb-5 text-info bg-dark">AtypikHouse : L'habitat alternatif</h2>
+                <video playsinline="playsinline" width="60%" autoplay="autoplay" muted="muted" loop="loop">
                     <source src="../../video/ATYPIK.mp4" type="video/mp4" >
                   </video>
-                <div class="lead text-muted fs-6"><br>
-                    <p style="text-align: justify; ">AtypikHouse sélectionne pour vous des hébergements insolites
+                <div class="lead text-muted  fs-6"><br>
+                    <p style=" text-align: auto; text-justify: auto;">
+                        <b>AtypikHouse sélectionne pour vous des hébergements insolites
                         partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
                         le vertige dans une cabane à 12 mètres de hauteur, laissez-vous flotter sur une cabane au milieu
                         d’un lac, observez les étoiles depuis votre lit dans une bulle .
@@ -90,11 +91,11 @@
 
                         Réservez instantanément votre coup de cœur directement en ligne depuis smartphone, tablette ou
                         ordinateur. A moins de 2 heures de chez vous ou à l’autre bout de la France, vous êtes sûrs de
-                        trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</p>
+                        trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</b></p>
                 </div>
             </div>
         </div>
-        <h1 class="fw-light mb-5  text-light bg-dark">Dernières annonces</h1>
+        <h2 class="fw-light mb-5  text-info bg-dark">Réservez maintenant : plus de 40 espaces en pleine nature.</h2>
         <div class="row justify-center mt-3">
             {% if properties|length > 0 %}
             {% for property in properties %}
@@ -148,7 +149,7 @@
             {% endif %}
         </div>
         
-        <h1 class="fw-light mb-5  text-light bg-dark">Carte des hébergements</h1>
+        <h2 class="fw-light mb-5  text-info bg-dark">Choisissez votre destination <b class="text-light">ET</b> entamez votre aventure sauvage</h2>
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
             <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
             </div>
