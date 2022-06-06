@@ -3,8 +3,14 @@
 {% block title %}Propriétés{% endblock %}
 
 {% block body %}
+<style>
+    h1 {
+       padding: 30px;
+      }
+</style>
 <div id="properties" class="container">
     <form action="{{ path('properties') }}" class="row justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
+       <h1 class="text-center"> résever maintenant en plein la nature </h1>
         <div class="col-md-4">
             <div class="form-floating">
                 <select class="form-select" id="propertyType" name="propertyType" aria-label="Type d'hébergement">
@@ -58,6 +64,7 @@
                         </div>
                         {% endfor %}
                     </div>
+                    
                     <button class="carousel-control-prev" type="button"
                         data-bs-target="#carouselExampleIndicators{{ property.id }}" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
