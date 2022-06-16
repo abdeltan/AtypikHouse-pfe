@@ -5,10 +5,28 @@ Register
 {% endblock title %}
 
 {% block body %}
+<style>
+    body{
+        background-color: #FFFAF0;
+    }
+</style>
 
-<div class="container-fluid !direction !spacing">
-    <div class="row justify-content-center mx-0 p-0 vh-100">
-        <div class="col-sm-12 col-md-8 col-lg-6 mt-5">
+
+<div class="container py-5 h-100 !direction !spacing">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                    
+                    <div class="col-md-6 col-lg-5 d-none d-md-block">
+                        <img src="{{asset('/images/mountains-in-engraving.webp')}} "
+                         alt="login form" class="img-fluid " style="border-radius: 1rem 0 0 1rem;"  />
+                         <img src="{{asset('/images/travel-man.webp')}} "
+                         alt="login form" class="img-fluid " style="border-radius: 1rem 0 0 1rem;"  />
+                      </div>
+                      
+                      <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5 text-black">
             {# {% if error %}
             <div class="alert alert-danger" role="alert">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
@@ -16,7 +34,7 @@ Register
             {% endif %} #}
             {{ form_start(registrationForm) }}
             <div class="row">
-                <h1 class="text-center">Inscription</h1>
+                <h3>Mon Profile</h3>
                 <div class="col-6">
                     <div class="form-floating mb-3">
                         {{ form_widget(registrationForm.firstName) }}
@@ -76,7 +94,10 @@ Register
             {{ form_end(registrationForm) }}
             <p class="text-center mt-3 text-secondary">If you have account, Please <a href="{{ path('login') }}">Login
                     Now</a></p>
+                </div>
         </div>
     </div>
+ </div>
+</div>
 </div>
 {% endblock %}
