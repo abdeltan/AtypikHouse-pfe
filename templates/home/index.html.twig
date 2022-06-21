@@ -5,12 +5,15 @@
 {% block body %}
 <style>
     body{
-        background-color:#FFFAF0;
+        background-image: url(../../../images/natural-lovely-pink-wallpaper-borders-12.jpg);
+        
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+      
     }
-    h2 {
-        border-bottom-style: solid;
-        border-bottom-width: medium;
-      }
+   
 </style>
 
 <div id="home">
@@ -74,15 +77,16 @@
 </form>
   </div>
     <section class="py-5 text-center container">
-        <div class="row py-lg-5 ">
+        <div class="row  ">
             <div class="mx-auto">
-                <h2 class="fw-light mb-5 text-success">AtypikHouse : L'habitat alternatif</h2>
+         <div class="card-title py-4">
+                <h2 class="h2 text-center text-light bg-dark py-4 ">AtypikHouse : L'habitat alternatif</h2></div>
                 <video playsinline="playsinline" width="60%" autoplay="autoplay" controls alt="video atypikHouse" muted="muted" loop="loop">
-                    <source src="../../video/ATYPIK.mp4" type="video/mp4" >
-                    <h3 class="text-success">Pourquoi atypikHouse</h3>
+                    <source src="../../video/ATYPIK.mp4" type="video/mp4" class="text-center">
+                    <h3 class=" text-center bg-dark text-light">Pourquoi atypikHouse</h3>
                   </video>
                   
-                <div class="lead text-muted  fs-6"><br>
+                <div class="lead text-dark  fs-6"><br>
                     <p style=" text-align: auto; text-justify: auto;">
                         <b>AtypikHouse sélectionne pour vous des hébergements insolites
                         partout en France ! AtypikHouse vous garantit un séjour unique hors des sentiers battus ! Défiez
@@ -95,9 +99,11 @@
                         ordinateur. A moins de 2 heures de chez vous ou à l’autre bout de la France, vous êtes sûrs de
                         trouver l’hébergement de vos rêves grâce à notre moteur de recherche intuitif.</b></p>
                 </div>
-            </div>
+            
         </div>
-        <h2 class="fw-light mb-5 text-success ">Réservez maintenant : plus de 40 espaces en pleine nature.</h2>
+    </div>
+    <div class="card-body">
+        <h2 class="fw-light mb-5 text-light bg-dark py-4 ">Réservez maintenant : plus de 40 espaces en pleine nature.</h2>
         <div class="row justify-center mt-3">
             {% if properties|length > 0 %}
             {% for property in properties %}
@@ -150,12 +156,18 @@
             {% endfor %}
             {% endif %}
         </div>
-        
-        <h2 class="fw-light mb-5  text-success">Choisissez votre destination ET entamez votre aventure sauvage</h2>
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    </div>
+    <div class="row py-lg-5 ">
+        <div class="mx-auto">
+        <div class="card-body ">
+        <h2 class="fw-light mb-5 text-light bg-dark py-4">Choisissez votre destination ET entamez votre aventure sauvage</h2>
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-0 py-3">
             <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
             </div>
-        </div>
+        </div> 
+    </div>
+     </div>
+    </div>
     </section>
 </div>
 {% endblock %}
