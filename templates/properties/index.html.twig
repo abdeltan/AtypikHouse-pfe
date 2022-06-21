@@ -25,9 +25,9 @@ style="
 
 </header>
 <div id="properties" class="container">
-    
+    <div class="card">
     <form action="{{ path('properties') }}" class="row justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
-       <h1 class="text-center"> résever maintenant en plein la nature </h1>
+       <h1 class="text-center text-light bg-dark" > Résever maintenant en plein la nature </h1>
         <div class="col-md-4">
             <div class="form-floating">
                 <select class="form-select" id="propertyType" name="propertyType" aria-label="Type d'hébergement">
@@ -94,7 +94,7 @@ style="
                     </button>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ property.title }}</h5>
+                    <h2 class="card-title">{{ property.title }}</h2>
                     <p class="card-text">{{ property.description|u.truncate(80,'...') }}</p>
                     <p>
                         <span class="badge rounded-pill bg-success">Capacité : {{ property.capacity }}</span>
@@ -114,11 +114,55 @@ style="
                     </div>
                 </div>
             </div>
-        </div>
+        </div></div>
         {% endfor %}
         {% endif %}
     </div>
+    <div class="card py-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card ">
+            <img src="{{asset('/images/Katies-Bitmoji.png')}}" height="250px" alt="Emogie de Sara">
+            <div class="card-body">
+              <h3 class="card-title text-center">Sara</h3>
+              <p class="card-text">Je recommande vraiment ce site ils sont très sérieux hyper rapide</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Dernière mise à jour il y a 20 Jours</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card ">
+            <img src="{{asset('/images/bitmoji-20180927101945.png')}}" height="250px"  alt="Emogie de jerome">
+            <div class="card-body">
+              <h3 class="card-title text-center">Jérôme</h3>
+              <p class="card-text">Grâce à ce site.  J'ai eu mes meilleurs jours.  J'ai découvert la vie sauvage. Merci Atypikhouse</p>
+            </div>
+            <div class="card-footer text-center">
+              <small class="text-muted">Dernière mise à jour il y a 1 année</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <img src="{{asset('/images/DK-Bitmoji-002.png')}}"  height="250px" alt="Emogie de Emma">
+            <div class="card-body">
+              <h3 class="card-title">Emma</h3>
+              <p class="card-text"> J'ai pris du bon temps dans la nature dans une cabine flottante.Prix raisonnable.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Dernière mise à jour il y a 6 mois</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
 </div>
+</div>
+
 {% endblock %}
 
 {% block javascript %}
