@@ -5,10 +5,13 @@
 {% block body %}
 <div class="container">
     <div class="row justify-content-center mt-5">
-        <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
             {{ form_start(addressForm) }}
-            <div class="row">
-                <h3>Mon adresse</h3>
+
+            
+                <h1 class="h1 card-header text-center text-light bg-dark py-3">Mon Adresse</h1>
+               <div class="card-body py-3">
+                <div class="row">
                 <div class="col-6">
                     <div class="form-floating mb-3">
                         {{ form_widget(addressForm.street_number) }}
@@ -23,30 +26,33 @@
                         {{ form_errors(addressForm.street_name) }}
                     </div>
                 </div>
-                <div class="col-6">
+            </div>
+            <div class="row">
+                <div class="col-4">
                     <div class="form-floating mb-3">
                         {{ form_widget(addressForm.city) }}
                         {{ form_label(addressForm.city) }}
                         {{ form_errors(addressForm.city) }}
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <div class="form-floating mb-3">
                         {{ form_widget(addressForm.code_zip) }}
                         {{ form_label(addressForm.code_zip) }}
                         {{ form_errors(addressForm.code_zip) }}
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <div class="form-floating mb-3">
                         {{ form_widget(addressForm.country) }}
                         {{ form_label(addressForm.country) }}
                         {{ form_errors(addressForm.country) }}
                     </div>
                 </div>
+            </div>
                 <div class="col-12 align-content-center d-flex">
-                    <a href="{{ path('my-account') }}" class="btn btn-outline-dark w-100 me-3">Annuler</a>
-                    <button type="submit" class="btn btn-outline-success w-100">Modifier</button>
+                    <a href="{{ path('my-account') }}" class="btn btn-danger w-100 me-3">Annuler</a>
+                    <button type="submit" class="btn btn-success w-100">Modifier</button>
                 </div>
             </div>
             {{ form_end(addressForm) }}
