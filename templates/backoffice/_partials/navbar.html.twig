@@ -15,6 +15,8 @@
 	</button>
 </div>
 <!-- End Logo Header -->
+
+
 <!-- Navbar Header -->
 <nav class="navbar navbar-header navbar-expand-lg">
 	<div class="container-fluid">
@@ -36,8 +38,7 @@
 								<div class="info">
 									<a data-toggle="collapse" aria-expanded="true">
 										<span>
-											<small>Bonjour</small>
-											<br>
+											<span id="bonjour"></span>
 											<span class="user-level">{{ app.user.lastName }}</span>
 										</span>
 									</a>
@@ -56,4 +57,15 @@
 		</ul>
 	</div>
 </nav>
+<script type="text/javascript"> 
+	today=new Date() 
+	if(today.getHours() >= 0 && today.getHours() < 18) /* A noter que si on mettait <= Bonjour continuerait jusqu'à 18h59 et qu'ici il s'arrête à 18h */ 
+	{      
+	document.getElementById('bonjour').innerHTML='Bonjour'; 
+	} 
+	else 
+	{      
+	document.getElementById('bonjour').innerHTML='Bonsoir'; 
+	} 
+	</script>
 <!-- End Navbar -->
