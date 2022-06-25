@@ -8,8 +8,24 @@ Réservation
 <div id="reservationDetails">
     <div class="container !direction !spacing">
         <div class="row justify-content-center mt-5">
-            <div class="col-sm-12 my-5">
-                <h1>Hébergement - {{ property.title }}</h1>
+            <div class="card">
+            <div class="card-title">
+            <h1 class="h1 text-center bg-dark text-light ">Mes Réservation Details</h1>
+        </div>
+        <div class="card-title">
+            <div class="col-sm-12 my-1">
+                <h2 class="text-center text-decoration-underline">Hébergement - {{ property.title }}</h2>
+                
+                    <div class="img-fluid">
+                        {% for image in property.images %}
+                        <div class="carousel-item {{ (loop.index == loop.first)? 'active' : '' }}">
+                            <img src="/images/gallery/{{ image.path }}"  class="mx-auto d-block w-50"
+                                alt="{{ property.title }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                 </div>
+            
             </div>
             <div class="col-sm-12 mb-3">
                 <div class="card">
@@ -34,38 +50,46 @@ Réservation
                     </div>
                 </div>
             </div>
-        </div>
+        
+        
         <div class="row justify-content-center mt-5">
             <div class="col-6 col-md-2 text-center">
+                <p><b>Type</b></p>
                 <i class="fad fa-house-flood fa-icon"></i>
                 <p>{{ property.propertyType.title }}</p>
             </div>
             <div class="col-6 col-md-2 text-center">
+                <p><b>Personnes</b></p>
                 <i class="fad fa-users fa-icon"></i>
                 <p>{{ property.capacity }}</p>
             </div>
             <div class="col-6 col-md-2 text-center">
+                <p><b>Superficie</b></p>
                 <i class="fad fa-draw-square fa-icon"></i>
                 <p>{{ property.superficie }} m2</p>
             </div>
             <div class="col-6 col-md-2 text-center">
+                <p><b>Eau</b></p>
                 <i class="fad fa-dewpoint fa-icon"></i>
                 <p>{{ (property.water)? 'Oui':'Non' }}</p>
             </div>
             <div class="col-6 col-md-2 text-center">
+                <p><b>Electricité</b></p>
                 <i class="fad fa-bolt  fa-icon"></i>
                 <p>{{ (property.electricity)? 'Oui':'Non' }}</p>
             </div>
         </div>
-        <div class="row justify-content-center bg-light rounded-3 p-5">
-            <h2 class="text-capitalize mb-3">équipements</h2>
+    </div>
+        <div class="row justify-content-center bg-light rounded-3 p-1 ">
+            <h2 class="text-capitalize text-center mb-3 py-3 text-decoration-underline">équipements</h2>
             {% for equipment in property.equipments %}
             <div class="col-sm-12 col-md-3">
-                <span class="text-muted">{{ equipment.title }}</span>
+                <span class="text-dark">{{ equipment.title }}</span>
                 <p class="fw-bold">{{ equipment.value }}</p>
             </div>
             {% endfor %}
         </div>
+
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
                 <div id="map" class="h-100 p-5 text-white bg-dark rounded-3"></div>
@@ -106,6 +130,7 @@ Réservation
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
 
