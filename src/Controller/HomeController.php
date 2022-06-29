@@ -6,6 +6,7 @@ use App\Entity\Addresse;
 use App\Entity\Contact;
 use App\Repository\AddresseRepository;
 use App\Repository\PropertyRepository;
+use App\Repository\PropertyTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +17,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(PropertyRepository $propertyRepository, AddresseRepository $addresseRepository): Response
+    public function index(PropertyRepository $propertyRepository, AddresseRepository $addresseRepository,PropertyTypeRepository $propertyTypeRepository): Response
     {
         return $this->render('home/index.html.twig', [
             'properties' => $propertyRepository->findLastNine(),
+            'propertyType' => $propertyTypeRepository->findAll()
         ]);
     }
 

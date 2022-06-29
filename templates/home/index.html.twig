@@ -36,6 +36,9 @@
         <div class="form-floating">
             <select class="form-select" id="propertyType" name="propertyType" aria-label="Type d'hébergement">
                 <option selected disabled>Type</option>
+                {% for type in propertyType %}
+                <option value="{{ type.id }}">{{ type.title }}</option>
+                {% endfor %}
                 
             </select>
             <label for="propertyType">Type d'hébergement</label>
