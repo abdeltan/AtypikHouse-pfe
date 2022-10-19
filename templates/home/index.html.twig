@@ -2,7 +2,7 @@
 
 {% block title %}Hébergements insolites - Vivez des expériences uniques{% endblock title %}
 
-{% block body %}
+{% block stylesheets %}
 <style>
     body{
         background-image: url(../../../images/natural-lovely-pink-wallpaper-borders-12.jpg);
@@ -13,8 +13,9 @@
         background-size: cover;
       
     }
-   
 </style>
+{% endblock %}
+{% block body %}
 
 <div id="home">
     
@@ -30,7 +31,7 @@
       background-size: cover;
     "
      >
-  <form action="{{ path('properties') }}" id="properties" class="row justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
+  <form action="{{ path('properties') }}" id="properties" class="row px-0 mx-0  justify-content-md-center justify-content-lg-between mx-0 py-0 g-2 mt-5">
     <h1 class="h1 text-center  "><b class="text-dark">Commencez <br> votre <br>histoire <br>avec <br> </b><b class="text-success"> LA N A T U R E</b></h1>
     <div class="col-md-4"></b>
         <div class="form-floating">
@@ -80,7 +81,7 @@
 </form>
   </div>
     <section class="py-5 text-center container">
-        <div class="row  ">
+        <div class="row px-0 mx-0   ">
             <div class="mx-auto">
          <div class="card-title py-4">
                 <h2 class="h2 text-center text-light bg-dark py-4 ">AtypikHouse : L'habitat alternatif</h2></div>
@@ -108,7 +109,7 @@
     
     <div class="card-body">
         <h2 class="fw-light mb-5 text-light bg-dark py-4 ">Réservez maintenant : plus de 40 espaces en pleine nature.</h2>
-        <div class="row justify-center mt-3">
+        <div class="row px-0 mx-0  justify-center mt-3">
             {% if properties|length > 0 %}
             {% for property in properties %}
             <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
@@ -161,11 +162,11 @@
             {% endif %}
         </div>
     </div>
-    <div class="row py-lg-5 ">
+    <div class="row px-0 mx-0  py-lg-5 ">
         <div class="mx-auto">
         <div class="card-body ">
         <h2 class="fw-light mb-5 text-light bg-dark py-4">Choisissez votre destination ET entamez votre aventure sauvage</h2>
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-0 py-3">
+        <div class="row px-0 mx-0  row px-0 mx-0 -cols-1 row px-0 mx-0 -cols-lg-3 align-items-stretch g-0 py-3">
             <div id="map" style="height: 500px;" class="col shadow-lg p-3 mb-5 bg-body rounded">
             </div>
         </div> 
