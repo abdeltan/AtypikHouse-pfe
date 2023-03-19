@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PropertyTypeRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -94,12 +95,28 @@ class PropertyType
         return $this->createdAt;
     }
 
+    // Allow nullable parameter
+    public function setCreatedAt(?DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        
+        return $this;
+    }
+
     /**
      * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    // Allow nullable parameter
+    public function setUpdatedAt(?DateTime $updatedAt): self
+    {
+        $this->createdAt = $updatedAt;
+        
+        return $this;
     }
 
     /**

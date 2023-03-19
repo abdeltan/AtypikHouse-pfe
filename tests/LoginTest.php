@@ -23,7 +23,7 @@ class LoginTest extends WebTestCase
         $user->setIsVerified(1);
         $user->setPassword('$3CR3T');
 
-        $manager = self::$container->get('doctrine')->getManager();
+        $manager = static::getContainer()->get('doctrine')->getManager();
         $manager->persist($user);
         $manager->flush();
 

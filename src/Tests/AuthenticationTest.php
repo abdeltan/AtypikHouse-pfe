@@ -24,9 +24,9 @@ class AuthenticationTest extends ApiTestCase
         $user = new User();
         $user->setEmail('test@example.com');
         $user->setPassword('$3CR3T');
-        $user->setRole(array('ROLE_USER'));
+        $user->setRoles(array('ROLE_USER'));
 
-        $manager = self::$container->get('doctrine')->getManager();
+        $manager = static::getContainer()->get('doctrine')->getManager();
         $manager->persist($user);
         $manager->flush();
 
